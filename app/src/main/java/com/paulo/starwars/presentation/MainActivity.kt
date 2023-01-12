@@ -11,7 +11,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.paulo.starwars.presentation.ui.list.ListStarWars
+import com.paulo.starwars.presentation.ui.listItem.ListItemStarWars
 import com.paulo.starwars.presentation.ui.profile.Profile
 import com.paulo.starwars.presentation.ui.theme.StarWarsTheme
 
@@ -19,18 +23,41 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
+            val navController = rememberNavController()
+
             StarWarsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   Profile{}
+                    NavHost(navController = navController, startDestination = "timeline") {
+                        composable("timeline") {
+                            ListStarWars(
+                                navController = navController,
+                                onSearch = {},
+                                onValueChange = { /*TODO*/ },
+                                value = ""
+                            )
+                        }
+                        composable("item") {
+                            ListItemStarWars(
+                                navController = navController,
+                            )
+                        }
+                        composable("profile") {
+                            Profile(
+                                navController = navController,
+                            )
+                        }
+                    }
                 }
             }
         }
     }
 }
+
 
 
 

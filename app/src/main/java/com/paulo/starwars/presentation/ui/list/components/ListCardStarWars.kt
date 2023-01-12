@@ -30,7 +30,7 @@ import com.paulo.starwars.presentation.ui.commom.ImageCoil
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListCardStarWars(
+ fun ListCardStarWars(
     title: String,
     urlImage: String,
     onClick: () -> Unit
