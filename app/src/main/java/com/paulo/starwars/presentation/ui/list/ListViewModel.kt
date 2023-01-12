@@ -3,7 +3,7 @@ package com.paulo.starwars.presentation.ui.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.paulo.starwars.data.usecases.listItem.GetListUseCases
+import com.paulo.starwars.domain.usecases.listItem.GetListUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

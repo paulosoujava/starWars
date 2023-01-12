@@ -1,6 +1,8 @@
-package com.paulo.starwars.data.models
+package com.paulo.starwars.domain.models
 
-data class Films(
+
+data class Vehicles(
+    val cargoCapacity: String,
     val consumables: String,
     val costInCredits: String,
     val created: String,
@@ -13,8 +15,8 @@ data class Films(
     val name: String,
     val passengers: String,
     val url: String,
+    val vehicleClass: String,
 
     val pilots: List<People>,
     val films: List<Films>,
-    val vehicleClass: String
 )

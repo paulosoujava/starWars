@@ -1,4 +1,4 @@
-package com.paulo.starwars.data.models
+package com.paulo.starwars.domain.models
 
 data class Planet(
     val climate: String,

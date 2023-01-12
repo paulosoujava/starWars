@@ -1,7 +1,7 @@
 package com.paulo.starwars.di
 
-import com.paulo.starwars.data.usecases.listItem.GetAllPeopleUseCase
-import com.paulo.starwars.data.usecases.listItem.GetListUseCases
+import com.paulo.starwars.domain.usecases.listItem.GetAllPeopleUseCase
+import com.paulo.starwars.domain.usecases.listItem.GetListUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

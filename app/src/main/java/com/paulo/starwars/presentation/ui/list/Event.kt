@@ -1,6 +1,6 @@
 package com.paulo.starwars.presentation.ui.list
 
-import com.paulo.starwars.data.models.People
+import com.paulo.starwars.domain.models.People
 
 sealed class UiStateList {
     object Loading : UiStateList()
