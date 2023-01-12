@@ -19,5 +19,5 @@ data class Starships(
     val url: String,
 
     val films: List<Films>,
-    val pilots: List<People?>,
+    val pilots: List<People>,
 )

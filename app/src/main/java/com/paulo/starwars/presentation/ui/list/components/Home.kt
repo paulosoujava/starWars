@@ -29,7 +29,6 @@ import com.paulo.starwars.utils.Constants
 @Composable
 fun Home(
     ListHome: List<Home>,
-    state: State<UiStateList>,
     navController: NavHostController
 ) {
     Scaffold(
@@ -53,12 +52,11 @@ fun Home(
                 bottom = it.calculateBottomPadding()
             ),
             content = {
-                items(ListHome, key = { it -> it.title }) { item ->
+                items(ListHome, key = {key -> key.title }) { item ->
                     ListCardStarWars(
                         title = item.title,
                         urlImage = item.url
                     ) {
-
                         navController.navigate(Constants.ITEM_PAGE)
                     }
                 }

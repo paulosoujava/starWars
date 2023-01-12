@@ -1,20 +1,20 @@
 package com.paulo.starwars.domain.models
 
 data class Films(
-    val consumables: String,
-    val costInCredits: String,
+
     val created: String,
-    val crew: String,
+    val director: String,
     val edited: String,
-    val length: String,
-    val manufacturer: String,
-    val maxAtmospheringSpeed: String,
-    val model: String,
-    val name: String,
-    val passengers: String,
+    val episodeID: Long,
+    val openingCrawl: String,
+    val producer: String,
+    val releaseDate: String,
+    val title: String,
     val url: String,
 
-    val pilots: List<People>,
-    val films: List<Films>,
-    val vehicleClass: String
+    val characters: List<People>,
+    val planets: List<Planets>,
+    val species: List<Species>,
+    val starships: List<Starships>,
+    val vehicles: List<Vehicles>
 )

@@ -20,24 +20,25 @@ fun ListStarWars(
     val viewModel = hiltViewModel<ListViewModel>()
     val state = viewModel.uiStateList.collectAsState()
 
-    val stateFilter = remember { mutableStateOf(false) }
 
     when (state.value.stateUi) {
         is Events.Error -> {
-           ErrorState()
+            ErrorState()
         }
 
         Events.Loading -> {
             Loading()
         }
 
-        Events.Regular -> state.value.listHome?.let {
-            Home(
-                it,
-                state,
-                navController = navController
-            )
-        }
+        Events.Regular ->
+            if (state.value.listHome == null)
+                ErrorState()
+            else
+                Home(
+                    state.value.listHome!!,
+                    navController = navController
+                )
+
     }
 }
 

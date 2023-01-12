@@ -1,6 +1,6 @@
 package com.paulo.starwars.domain.models
 
-data class Planet(
+data class Planets(
     val climate: String,
     val created: String,
     val diameter: String,
