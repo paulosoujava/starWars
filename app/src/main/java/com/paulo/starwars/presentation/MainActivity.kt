@@ -19,7 +19,9 @@ import com.paulo.starwars.presentation.ui.listItem.ListItemStarWars
 import com.paulo.starwars.presentation.ui.profile.Profile
 import com.paulo.starwars.presentation.ui.theme.StarWarsTheme
 import com.paulo.starwars.utils.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
