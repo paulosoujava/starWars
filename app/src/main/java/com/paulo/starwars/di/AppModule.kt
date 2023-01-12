@@ -3,8 +3,7 @@ package com.paulo.starwars.di
 import com.paulo.starwars.data.Api
 import com.paulo.starwars.data.repository.RemoteRepositoryImpl
 import com.paulo.starwars.domain.repository.IRemoteRepository
-import com.paulo.starwars.domain.usecases.listItem.GetHomeUseCase
-import com.paulo.starwars.domain.usecases.listItem.GetListUseCases
+import com.paulo.starwars.domain.usecases.list.GetHomeUseCase
 import com.paulo.starwars.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -32,11 +31,11 @@ object AppModule {
     @Singleton
     fun provideListUseCases(
         repository: IRemoteRepository
-    ):GetListUseCases{
-        return GetListUseCases(
-            getHomeUSeCase = GetHomeUseCase( repository = repository)
-        )
+    ): GetHomeUseCase {
+        return GetHomeUseCase(repository = repository)
+
     }
+
     @Provides
     @Singleton
     fun provideRemoteRepository(api: Api): IRemoteRepository {
