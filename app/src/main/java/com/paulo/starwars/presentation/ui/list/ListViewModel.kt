@@ -3,10 +3,11 @@ package com.paulo.starwars.presentation.ui.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paulo.starwars.core.Events
 import com.paulo.starwars.domain.usecases.listItem.GetListUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,13 +16,18 @@ class ListViewModel @Inject constructor(
     private val useCases: GetListUseCases
 ) : ViewModel() {
 
-    private val _uiStateList = MutableStateFlow(UiStateList.Loading)
-    val uiState: StateFlow<UiStateList> = _uiStateList
+    var uiStateList = MutableStateFlow(UiStateList())
+        private set
 
 
     init {
         viewModelScope.launch {
-
+            uiStateList.update {
+                it.copy(
+                    stateUi = Events.Regular,
+                    listHome = useCases.getHomeUSeCase()
+                )
+            }
         }
     }
 }
