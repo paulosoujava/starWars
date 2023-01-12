@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paulo.starwars.core.Events
 import com.paulo.starwars.domain.usecases.list.GetHomeUseCase
+import com.paulo.starwars.domain.usecases.list.GetListUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    private val useCases: GetHomeUseCase
+    private val useCases: GetListUseCases
 ) : ViewModel() {
 
 
@@ -26,7 +27,7 @@ class ListViewModel @Inject constructor(
             uiStateList.update {
                 it.copy(
                     stateUi = Events.Regular,
-                    listHome = useCases()
+                    listHome = useCases.getHomeUSeCase()
                 )
             }
         }
