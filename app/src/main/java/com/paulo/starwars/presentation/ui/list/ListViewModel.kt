@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paulo.starwars.core.Events
 import com.paulo.starwars.domain.usecases.listItem.GetListUseCases
+import com.paulo.starwars.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -15,6 +16,7 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(
     private val useCases: GetListUseCases
 ) : ViewModel() {
+
 
     var uiStateList = MutableStateFlow(UiStateList())
         private set
@@ -30,4 +32,7 @@ class ListViewModel @Inject constructor(
             }
         }
     }
+
+
+
 }

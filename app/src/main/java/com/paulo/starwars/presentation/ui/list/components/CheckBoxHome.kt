@@ -21,23 +21,27 @@ import com.paulo.starwars.presentation.ui.theme.yellowOnFocus
 @Composable
 fun RowScope.CheckBox(
     label: String,
+    checkClick: (String) -> Unit,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start
 ) {
     val stateCheckBox = remember {
-        mutableStateOf(false)
+        mutableStateOf(true)
     }
     Row(
         horizontalArrangement = horizontalArrangement,
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .clickable {
-                stateCheckBox.value = !stateCheckBox.value
+                checkClick(label)
             }
             .weight(1f)
     ) {
         Checkbox(
             checked = stateCheckBox.value,
-            onCheckedChange = { stateCheckBox.value = !stateCheckBox.value },
+            onCheckedChange = {
+                stateCheckBox.value = !stateCheckBox.value
+                checkClick(label)
+            },
             colors = CheckboxDefaults.colors(
                 checkedColor = yellowOnFocus,
                 uncheckedColor = Color.DarkGray,

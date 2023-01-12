@@ -1,6 +1,5 @@
 package com.paulo.starwars.presentation.ui.list
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -13,12 +12,8 @@ import com.paulo.starwars.presentation.ui.commom.Loading
 import com.paulo.starwars.presentation.ui.list.components.Home
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListStarWars(
-    onSearch: () -> Unit,
-    onValueChange: () -> Unit,
-    value: String,
     navController: NavHostController,
 ) {
 
@@ -39,7 +34,7 @@ fun ListStarWars(
         Events.Regular -> state.value.listHome?.let {
             Home(
                 it,
-                stateFilter = stateFilter,
+                state,
                 navController = navController
             )
         }

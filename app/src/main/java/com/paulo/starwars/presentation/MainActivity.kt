@@ -39,9 +39,6 @@ class MainActivity : ComponentActivity() {
                         composable( Constants.TIMELINE_PAGE) {
                             ListStarWars(
                                 navController = navController,
-                                onSearch = {},
-                                onValueChange = { /*TODO*/ },
-                                value = ""
                             )
                         }
                         composable( Constants.ITEM_PAGE) {
