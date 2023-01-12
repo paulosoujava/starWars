@@ -3,4 +3,7 @@
     <string name="image_card_description">Image Card</string>
     <string name="back_to_home_description">Back to Home</string>
     <string name="back_label_button">Voltar</string>
+    <string name="star_wars">Star Wars</string>
+    <string name="filter_icon">filter icon</string>
+    <string name="pesquisar">Pesquisar</string>
 </resources>

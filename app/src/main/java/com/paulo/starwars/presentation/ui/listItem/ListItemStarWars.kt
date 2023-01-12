@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.paulo.starwars.presentation.ui.commom.TopBar
 import com.paulo.starwars.presentation.ui.listItem.components.ListItemCardStarWars
+import com.paulo.starwars.utils.Constants
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,7 +36,7 @@ fun ListItemStarWars(
                         title = "Title $i",
                         urlImage = "https://starwars-visualguide.com/assets/img/starships/5.jpg"
                     ) {
-                        navController.navigate("profile")
+                        navController.navigate(Constants.PROFILE_PAGE)
                     }
                 }
             }

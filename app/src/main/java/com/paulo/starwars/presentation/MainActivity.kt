@@ -18,6 +18,7 @@ import com.paulo.starwars.presentation.ui.list.ListStarWars
 import com.paulo.starwars.presentation.ui.listItem.ListItemStarWars
 import com.paulo.starwars.presentation.ui.profile.Profile
 import com.paulo.starwars.presentation.ui.theme.StarWarsTheme
+import com.paulo.starwars.utils.Constants
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +33,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavHost(navController = navController, startDestination = "timeline") {
-                        composable("timeline") {
+                    NavHost(navController = navController, startDestination = Constants.TIMELINE_PAGE) {
+                        composable( Constants.TIMELINE_PAGE) {
                             ListStarWars(
                                 navController = navController,
                                 onSearch = {},
@@ -41,12 +42,12 @@ class MainActivity : ComponentActivity() {
                                 value = ""
                             )
                         }
-                        composable("item") {
+                        composable( Constants.ITEM_PAGE) {
                             ListItemStarWars(
                                 navController = navController,
                             )
                         }
-                        composable("profile") {
+                        composable( Constants.PROFILE_PAGE) {
                             Profile(
                                 navController = navController,
                             )

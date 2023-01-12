@@ -32,12 +32,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.paulo.starwars.R
 import com.paulo.starwars.presentation.ui.list.components.ListCardStarWars
 import com.paulo.starwars.presentation.ui.theme.yellowOnFocus
+import com.paulo.starwars.utils.Constants
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -64,14 +67,14 @@ fun ListStarWars(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Star Wars",
+                        text = stringResource(R.string.star_wars),
                         style = TextStyle(color = Color.Yellow, fontWeight = FontWeight.Bold),
                         modifier = Modifier.weight(2f)
                     )
                     IconButton(onClick = { stateFilter.value = !stateFilter.value }) {
                         Icon(
                             imageVector = Icons.Default.List,
-                            contentDescription = "filter icon",
+                            contentDescription = stringResource(R.string.filter_icon),
                             tint = Color.Yellow
                         )
                     }
@@ -83,7 +86,7 @@ fun ListStarWars(
                     onValueChange = {},
                     label = {
                         Text(
-                            "Pesquisar",
+                            stringResource(R.string.pesquisar),
                             style = TextStyle(color = yellowOnFocus)
                         )
                     },
@@ -147,7 +150,7 @@ fun ListStarWars(
                         title = "Title $i",
                         urlImage = "https://starwars-visualguide.com/assets/img/starships/5.jpg"
                     ) {
-                        navController.navigate("item")
+                        navController.navigate(Constants.ITEM_PAGE)
                     }
                 }
             }

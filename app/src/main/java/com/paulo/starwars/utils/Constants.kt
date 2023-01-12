@@ -9,5 +9,8 @@ class Constants {
         val SPECIES ="species"
         val VEHICLES ="vehicles"
         val STARSHIPS ="starships"
+        val TIMELINE_PAGE ="timeline"
+        val ITEM_PAGE ="item"
+        val PROFILE_PAGE ="profile"
     }
 }
