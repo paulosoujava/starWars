@@ -6,8 +6,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.paulo.starwars.presentation.ui.commom.TopBar
 import com.paulo.starwars.presentation.ui.listItem.components.ListItemCardStarWars
@@ -19,6 +21,11 @@ import com.paulo.starwars.utils.Constants
 fun ListItemStarWars(
     navController: NavHostController
 ) {
+    val args = navController.currentBackStackEntry?.arguments
+    val viewModel = hiltViewModel<ListItemViewModel>()
+    LaunchedEffect(true){
+        viewModel.fetchData(args)
+    }
     Scaffold(
         topBar = {
             TopBar { navController.popBackStack() }

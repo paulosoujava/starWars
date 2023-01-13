@@ -11,9 +11,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.paulo.starwars.presentation.ui.list.ListStarWars
 import com.paulo.starwars.presentation.ui.listItem.ListItemStarWars
 import com.paulo.starwars.presentation.ui.profile.Profile
@@ -41,10 +43,11 @@ class MainActivity : ComponentActivity() {
                                 navController = navController,
                             )
                         }
-                        composable( Constants.ITEM_PAGE) {
-                            ListItemStarWars(
-                                navController = navController,
-                            )
+                        composable(
+                            route = "${Constants.ITEM_PAGE}/{type}",
+                            arguments = listOf(navArgument("type") { type = NavType.StringType })
+                        ) {
+                            ListItemStarWars(navController = navController,)
                         }
                         composable( Constants.PROFILE_PAGE) {
                             Profile(

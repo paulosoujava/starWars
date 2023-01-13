@@ -1,8 +1,8 @@
 package com.paulo.starwars.data
 
 data class Result<T>(
-    val count: Int,
+    val count: Long,
     val next: String,
-    val previous: Int,
-    val list: List<T>
+    val previous: Int? = null,
+    val results: List<T>
 )

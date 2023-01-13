@@ -52,6 +52,12 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun providePeopleUseCases(
+        repository: IRemoteRepository
+    )= GetPeopleUseCase (repository = repository)
+
+    @Provides
+    @Singleton
     fun provideRemoteRepository(api: Api): IRemoteRepository {
         return RemoteRepositoryImpl(api)
     }

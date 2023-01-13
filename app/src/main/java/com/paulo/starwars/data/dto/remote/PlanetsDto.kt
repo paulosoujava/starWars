@@ -4,39 +4,43 @@ import com.google.gson.annotations.SerializedName
 import com.paulo.starwars.domain.models.Planets
 
 data class PlanetsDto(
-    val climate: String,
-    val created: String,
-    val diameter: String,
-    val edited: String,
-    val gravity: String,
-    val name: String,
-    @SerializedName("orbital_period")
-    val orbitalPeriod: String,
-    val population: String,
-    @SerializedName("rotation_period")
-    val rotationPeriod: String,
-    @SerializedName("rotation_period")
-    val surface_water: String,
-    val terrain: String,
-    val url: String,
 
-    val films: List<FilmsDto>,
-    val residents: List<PeopleDto>,
+    @SerializedName("rotation_period")
+    val rotationPeriod: String?,
+    @SerializedName("surface_water")
+    val surfaceWater: String?,
+    @SerializedName("orbital_period")
+    val orbitalPeriod: String?,
+
+    val name: String?,
+    val diameter: String?,
+    val climate: String?,
+    val gravity: String?,
+    val terrain: String?,
+    val population: String?,
+    val created: String?,
+    val edited: String?,
+    val url: String?,
+
+
+    val residents: List<String>?,
+    val films: List<String>?,
+
 ){
     fun toDomain() = Planets(
-        climate,
-        created,
-        diameter,
-        edited,
-        gravity,
-        name,
-        orbitalPeriod,
-        population,
-        rotationPeriod,
-        surface_water,
-        terrain,
-        url,
-        films =  emptyList(),
-        residents =  residents.map { it.toDomain() },
+        climate?: "",
+        created?: "",
+        diameter?: "",
+        edited?: "",
+        gravity?: "",
+        name?: "",
+        orbitalPeriod?: "",
+        population?: "",
+        rotationPeriod?: "",
+        surfaceWater?: "",
+        terrain?: "",
+        url?: "",
+        films =  if(films.isNullOrEmpty()) emptyList() else films ,
+        residents =  if(residents.isNullOrEmpty()) emptyList() else residents ,
     )
 }

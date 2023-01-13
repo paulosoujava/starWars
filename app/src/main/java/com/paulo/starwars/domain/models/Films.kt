@@ -12,9 +12,9 @@ data class Films(
     val title: String,
     val url: String,
 
-    val characters: List<People>,
-    val planets: List<Planets>,
-    val species: List<Species>,
-    val starships: List<Starships>,
-    val vehicles: List<Vehicles>
+    val characters: List<String>,
+    val planets: List<String>,
+    val species: List<String>,
+    val starships: List<String>,
+    val vehicles: List<String>
 )

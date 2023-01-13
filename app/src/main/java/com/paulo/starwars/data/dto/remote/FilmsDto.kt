@@ -4,42 +4,44 @@ import com.google.gson.annotations.SerializedName
 import com.paulo.starwars.domain.models.Films
 
 data class FilmsDto(
-    val created: String,
-    val director: String,
-    val edited: String,
-    @SerializedName("episode_id")
-    val episodeID: Long,
-    @SerializedName("opening_crawl")
-    val openingCrawl: String,
-    val producer: String,
-    @SerializedName("release_date")
-    val releaseDate: String,
-    val title: String,
-    val url: String,
 
-    val characters: List<PeopleDto>,
-    val planets: List<PlanetsDto>,
-    val species: List<SpeciesDto>,
-    val starships: List<StarshipsDto>,
-    val vehicles: List<VehiclesDto>
+    @SerializedName("episode_id")
+    val episodeID: Long?,
+    @SerializedName("opening_crawl")
+    val openingCrawl: String?,
+    @SerializedName("release_date")
+    val releaseDate: String?,
+
+    val director: String?,
+    val producer: String?,
+    val title: String?,
+    val created: String?,
+    val edited: String?,
+    val url: String?,
+
+    val characters: List<String>?,
+    val planets: List<String>?,
+    val starships: List<String>?,
+    val vehicles: List<String>?,
+    val species: List<String>?,
+
 ) {
 
     fun toDomain() = Films(
-        created,
-        director,
-        edited,
-        episodeID,
-        openingCrawl,
-        producer,
-        releaseDate,
-        title,
-        url,
-        //characters = characters.map { it.toDomain() },
-        planets = planets.map { it.toDomain() },
-        starships = starships.map { it.toDomain() },
-        vehicles = vehicles.map { it.toDomain() },
-        //species = species.map { it.toDomain() },
-        characters = emptyList(),
-        species = emptyList()
+        created ?:"",
+        director?:"",
+        edited?:"",
+        episodeID ?: 0L,
+        openingCrawl?:"",
+        producer?:"",
+        releaseDate?:"",
+        title?:"",
+        url?:"",
+        characters  = if(characters.isNullOrEmpty()) emptyList() else characters ,
+        planets =  if(planets.isNullOrEmpty()) emptyList() else planets ,
+        starships =  if(starships.isNullOrEmpty()) emptyList() else starships ,
+        vehicles =  if(vehicles.isNullOrEmpty()) emptyList() else vehicles ,
+        species =  if(species.isNullOrEmpty()) emptyList() else species ,
+
     )
 }

@@ -1,5 +1,6 @@
 package com.paulo.starwars.domain.repository
 
+import com.paulo.starwars.data.Result
 import com.paulo.starwars.domain.models.Films
 import com.paulo.starwars.domain.models.Home
 import com.paulo.starwars.domain.models.People

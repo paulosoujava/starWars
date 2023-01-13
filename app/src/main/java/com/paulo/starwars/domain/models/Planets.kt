@@ -14,6 +14,6 @@ data class Planets(
     val terrain: String,
     val url: String,
 
-    val films: List<Films>,
-    val residents: List<People>,
+    val films: List<String>,
+    val residents: List<String>,
 )

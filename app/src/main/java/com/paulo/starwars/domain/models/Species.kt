@@ -15,6 +15,6 @@ data class Species(
     val skinColors: String,
     val url: String,
 
-    val people: List<People>,
-    val films: List<Films>,
+    val people: List<String>,
+    val films: List<String>,
 )

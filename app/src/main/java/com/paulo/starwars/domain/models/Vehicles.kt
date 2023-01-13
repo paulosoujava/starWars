@@ -17,6 +17,6 @@ data class Vehicles(
     val url: String,
     val vehicleClass: String,
 
-    val pilots: List<People>,
-    val films: List<Films>,
+    val pilots: List<String>,
+    val films: List<String>,
 )

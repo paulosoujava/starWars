@@ -18,6 +18,6 @@ data class Starships(
     val starshipClass: String,
     val url: String,
 
-    val films: List<Films>,
-    val pilots: List<People>,
+    val films: List<String>,
+    val pilots: List<String>,
 )

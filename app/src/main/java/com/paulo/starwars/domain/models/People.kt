@@ -13,8 +13,9 @@ data class People(
     val created: String,
     val edited: String,
     val url: String,
-    val films: List<Films>,
-    val species: List<Species>,
-    val starships: List<Starships>,
-    val vehicles: List<Vehicles>
+
+    val films: List<String>,
+    val species: List<String>,
+    val starships: List<String>,
+    val vehicles: List<String>
 )
