@@ -23,7 +23,6 @@ import com.paulo.starwars.R
 
 @Composable
 fun ImageCoil(urlImage: String) {
-
     AsyncImage(
         model = ImageRequest.Builder(LocalContext.current)
             .data(urlImage)

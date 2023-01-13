@@ -55,7 +55,7 @@ fun ListItemStarWars(
     val currentLimitPageToIndexPhoto = viewModel.currentPage.collectAsState()
     val result = state.value.success
 
-    LaunchedEffect(true) {
+    LaunchedEffect(Unit) {
         viewModel.fetchData()
     }
 
@@ -63,8 +63,7 @@ fun ListItemStarWars(
         topBar = {
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color.Black),
+                    .fillMaxWidth().background(Color.Black),
 
                 ) {
                 TopBar { navController.popBackStack() }
