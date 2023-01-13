@@ -1,60 +1,40 @@
 package com.paulo.starwars.data
 
-import com.paulo.starwars.data.dto.remote.HomeDto
+import com.paulo.starwars.data.dto.remote.FilmsDto
+import com.paulo.starwars.data.dto.remote.PeopleDto
+import com.paulo.starwars.data.dto.remote.PlanetsDto
+import com.paulo.starwars.data.dto.remote.SpeciesDto
+import com.paulo.starwars.data.dto.remote.StarshipsDto
+import com.paulo.starwars.data.dto.remote.VehiclesDto
 import com.paulo.starwars.domain.models.Films
-import com.paulo.starwars.domain.models.People
 import com.paulo.starwars.domain.models.Planets
 import com.paulo.starwars.domain.models.Species
 import com.paulo.starwars.domain.models.Starships
 import com.paulo.starwars.domain.models.Vehicles
-import com.paulo.starwars.utils.Constants
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-
-fun getImageHome() = listOf(
-    HomeDto(
-        url = "${Constants.URL_BASE_TO_IMAGE}/${Constants.CHARACTERS }.jpg",
-        title = Constants.CHARACTERS.uppercase()
-    ),
-    HomeDto(
-        url = "${Constants.URL_BASE_TO_IMAGE}/${Constants.FILMS }.jpg",
-        title = Constants.FILMS.uppercase()
-    ),
-    HomeDto(
-        url = "${Constants.URL_BASE_TO_IMAGE}/${Constants.SPECIES }.jpg",
-        title = Constants.SPECIES.uppercase()
-    ),
-    HomeDto(
-        url = "${Constants.URL_BASE_TO_IMAGE}/${Constants.VEHICLES }.jpg",
-        title = Constants.VEHICLES.uppercase()
-    ),
-    HomeDto(
-        url = "${Constants.URL_BASE_TO_IMAGE}/${Constants.PLANETS }.jpg",
-        title = Constants.PLANETS.uppercase()
-    ),HomeDto(
-        url = "${Constants.URL_BASE_TO_IMAGE}/${Constants.STARSHIPS }.jpg",
-        title = Constants.STARSHIPS.uppercase()
-    )
-)
 
 interface Api {
-    @GET("people/")
-    suspend fun getPeople(): Result<People>
+    @GET("people")
+    suspend fun getPeople(
+         @Query("page") page: Long
+    ): Result<PeopleDto>
 
     @GET("films")
-    suspend fun getFilms(): Result<Films>
+    suspend fun getFilms(): Result<FilmsDto>
 
     @GET("planets")
-    suspend fun getPlanets(): Result<Planets>
+    suspend fun getPlanets(): Result<PlanetsDto>
 
     @GET("species")
-    suspend fun getSpecies(): Result<Species>
+    suspend fun getSpecies(): Result<SpeciesDto>
 
     @GET("starships")
-    suspend fun getStarships(): Result<Starships>
+    suspend fun getStarships(): Result<StarshipsDto>
 
     @GET("vehicles")
-    suspend fun getVehicles(): Result<Vehicles>
+    suspend fun getVehicles(): Result<VehiclesDto>
 
 
 

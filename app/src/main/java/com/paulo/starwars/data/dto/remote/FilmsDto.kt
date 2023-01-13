@@ -6,7 +6,7 @@ import com.paulo.starwars.domain.models.Films
 data class FilmsDto(
 
     @SerializedName("episode_id")
-    val episodeID: Long?,
+    val episodeID: String?,
     @SerializedName("opening_crawl")
     val openingCrawl: String?,
     @SerializedName("release_date")
@@ -31,7 +31,7 @@ data class FilmsDto(
         created ?:"",
         director?:"",
         edited?:"",
-        episodeID ?: 0L,
+        episodeID ?: "",
         openingCrawl?:"",
         producer?:"",
         releaseDate?:"",

@@ -27,7 +27,8 @@ import com.paulo.starwars.R
 
 @Composable
 fun ErrorState(
-    navController: NavHostController
+    navController: NavHostController,
+    errorMessage: String = ""
 ) {
     Column(
         modifier = Modifier
@@ -48,7 +49,7 @@ fun ErrorState(
         }
         Spacer(modifier = Modifier.height(30.dp))
         Text(
-            text = stringResource(R.string.message_error),
+            text = stringResource(R.string.message_error) + "\n$errorMessage",
             fontSize = 16.sp,
             color = Color.Yellow
         )
