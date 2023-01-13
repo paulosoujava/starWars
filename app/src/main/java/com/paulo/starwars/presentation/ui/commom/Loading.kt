@@ -1,5 +1,6 @@
 package com.paulo.starwars.presentation.ui.commom
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,14 +15,14 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun Loading() {
     Row(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(Color.Black),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
         CircularProgressIndicator(
             strokeWidth = 1.dp,
             modifier = Modifier.size(40.dp),
-            color = Color.Black
+            color = Color.Yellow
         )
     }
 }

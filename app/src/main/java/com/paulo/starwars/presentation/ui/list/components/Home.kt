@@ -57,7 +57,7 @@ fun Home(
                         title = item.title,
                         urlImage = item.url
                     ) {
-                        navController.navigate("${Constants.ITEM_PAGE}/${item.title}")
+                        navController.navigate(Constants.ITEM_PAGE)
                     }
                 }
             }

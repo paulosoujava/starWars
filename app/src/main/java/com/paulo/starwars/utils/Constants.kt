@@ -2,6 +2,7 @@ package com.paulo.starwars.utils
 
 class Constants {
     companion object {
+        val BASE_PATH_CHARACTERES= "https://starwars-visualguide.com/assets/img/characters/"
         val BASE_URL= "https://swapi.dev/api/"
         val URL_BASE_TO_IMAGE = "https://starwars-visualguide.com/assets/img/categories/"
         val CHARACTERS ="character"

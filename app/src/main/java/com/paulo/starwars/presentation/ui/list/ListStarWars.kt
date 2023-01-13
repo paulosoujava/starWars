@@ -23,7 +23,7 @@ fun ListStarWars(
 
     when (state.value.stateUi) {
         is Events.Error -> {
-            ErrorState()
+            ErrorState(navController)
         }
 
         Events.Loading -> {
@@ -32,7 +32,7 @@ fun ListStarWars(
 
         Events.Regular ->
             if (state.value.listHome == null)
-                ErrorState()
+                ErrorState(navController)
             else
                 Home(
                     state.value.listHome!!,

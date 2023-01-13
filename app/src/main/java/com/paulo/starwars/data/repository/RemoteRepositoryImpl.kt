@@ -1,5 +1,7 @@
 package com.paulo.starwars.data.repository
 
+import com.paulo.starwars.core.handlerNetwork
+import com.paulo.starwars.core.triple
 import com.paulo.starwars.data.Api
 import com.paulo.starwars.data.Result
 import com.paulo.starwars.data.getImageHome
@@ -21,6 +23,7 @@ class RemoteRepositoryImpl(
         return getImageHome().map { it.toDomain() }
     }
     override suspend fun getPeoples(): List<People> {
+
         val response = api.getPeople()
         return response.results
     }

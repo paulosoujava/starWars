@@ -7,47 +7,42 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.paulo.starwars.core.Events
+import com.paulo.starwars.presentation.ui.commom.ErrorState
+import com.paulo.starwars.presentation.ui.commom.Loading
 import com.paulo.starwars.presentation.ui.commom.TopBar
+import com.paulo.starwars.presentation.ui.listItem.components.ListDetail
 import com.paulo.starwars.presentation.ui.listItem.components.ListItemCardStarWars
 import com.paulo.starwars.utils.Constants
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListItemStarWars(
     navController: NavHostController
 ) {
-    val args = navController.currentBackStackEntry?.arguments
+
     val viewModel = hiltViewModel<ListItemViewModel>()
-    LaunchedEffect(true){
-        viewModel.fetchData(args)
+    val state = viewModel.uiStateList.collectAsState()
+    LaunchedEffect(true) {
+        viewModel.fetchData()
     }
-    Scaffold(
-        topBar = {
-            TopBar { navController.popBackStack() }
-        }
-    ) {
-        LazyVerticalGrid(
-            modifier = Modifier.padding(
-                top = it.calculateTopPadding(),
-                bottom = it.calculateBottomPadding()
-            ),
-            columns = GridCells.Adaptive(150.dp),
-            content = {
-                items(20) { i ->
-                    ListItemCardStarWars(
-                        title = "Title $i",
-                        urlImage = "https://starwars-visualguide.com/assets/img/starships/5.jpg"
-                    ) {
-                        navController.navigate(Constants.PROFILE_PAGE)
-                    }
-                }
+
+    when (state.value.stateUi) {
+        is Events.Error -> ErrorState(navController)
+        Events.Loading -> Loading()
+        Events.Regular -> {
+            if (state.value.success != null) {
+                ListDetail(list = state.value.success!!, navController = navController)
+            } else {
+                ErrorState(navController)
             }
-        )
+        }
     }
+
 
 }

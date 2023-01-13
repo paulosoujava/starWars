@@ -44,8 +44,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(
-                            route = "${Constants.ITEM_PAGE}/{type}",
-                            arguments = listOf(navArgument("type") { type = NavType.StringType })
+                            route = Constants.ITEM_PAGE
                         ) {
                             ListItemStarWars(navController = navController,)
                         }
