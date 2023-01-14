@@ -12,14 +12,17 @@ import com.paulo.starwars.domain.models.Species
 import com.paulo.starwars.domain.models.Starships
 import com.paulo.starwars.domain.models.Vehicles
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
 interface Api {
     @GET("people")
-    suspend fun getPeople(
-         @Query("page") page: Long
-    ): Result<PeopleDto>
+    suspend fun getPeople(@Query("page") page: Long): Result<PeopleDto>
+
+
+    @GET("people/{id}")
+    suspend fun getProfileById(@Path("id") id: Long): PeopleDto
 
     @GET("films")
     suspend fun getFilms(): Result<FilmsDto>
@@ -35,7 +38,6 @@ interface Api {
 
     @GET("vehicles")
     suspend fun getVehicles(): Result<VehiclesDto>
-
 
 
 }

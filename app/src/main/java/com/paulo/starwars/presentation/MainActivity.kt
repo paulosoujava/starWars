@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val splashScreen = installSplashScreen()
             splashScreen.setKeepOnScreenCondition { false }
         }
@@ -48,8 +48,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavHost(navController = navController, startDestination = Constants.TIMELINE_PAGE) {
-                        composable( Constants.TIMELINE_PAGE) {
+                    NavHost(
+                        navController = navController,
+                        startDestination = Constants.TIMELINE_PAGE
+                    ) {
+                        composable(Constants.TIMELINE_PAGE) {
                             ListStarWars(
                                 navController = navController,
                             )
@@ -57,11 +60,18 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Constants.ITEM_PAGE
                         ) {
-                            ListItemStarWars(navController = navController,)
+                            ListItemStarWars(navController = navController)
                         }
-                        composable( Constants.PROFILE_PAGE) {
+                        //${Constants.PROFILE_PAGE}/$imageUrl
+                        composable(
+                            "${Constants.PROFILE_PAGE}/{imageUrl}",
+                            arguments = listOf(navArgument("imageUrl") {
+                                defaultValue = "https://starwars-visualguide.com/assets/img/characters/3.jpg"
+                            })
+                        ) { backStackEntry ->
                             Profile(
                                 navController = navController,
+                                backStackEntry.arguments?.getString("imageUrl")
                             )
                         }
                     }

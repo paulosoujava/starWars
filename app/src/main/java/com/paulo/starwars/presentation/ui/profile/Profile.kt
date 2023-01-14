@@ -1,6 +1,6 @@
 package com.paulo.starwars.presentation.ui.profile
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -24,6 +24,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,19 +37,26 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.paulo.starwars.R
 import com.paulo.starwars.presentation.ui.commom.ImageCoil
 import com.paulo.starwars.presentation.ui.commom.TopBar
+import com.paulo.starwars.utils.Constants
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Profile(
-    navController: NavHostController
+    navController: NavHostController,
+    urlPhoto: String?
 ) {
 
+    val viewModel = hiltViewModel<ProfileViewModel>()
+    LaunchedEffect(key1 = Unit){
+        //viewModel.fetchData()
+    }
 
     Scaffold(
         topBar = {
@@ -76,7 +84,7 @@ fun Profile(
                         .width(200.dp)
                         .height(300.dp)
                 ) {
-                    ImageCoil("https://starwars-visualguide.com/assets/img/characters/1.jpg")
+                    ImageCoil("${Constants.BASE_PATH_CHARACTERES}$urlPhoto")
                 }
                 Column(horizontalAlignment = Alignment.Start) {
                     Link(text = "Birth Year:", link = " 19BBY", hasLink = false)

@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import com.paulo.starwars.domain.models.Films
 import com.paulo.starwars.domain.models.People
 
-
 data class PeopleDto(
     @SerializedName("hair_color")
     val hairColor: String?,

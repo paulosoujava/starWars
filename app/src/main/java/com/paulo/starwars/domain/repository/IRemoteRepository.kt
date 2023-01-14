@@ -12,6 +12,7 @@ import com.paulo.starwars.domain.models.Vehicles
 
 interface IRemoteRepository {
     suspend fun  getPeoples(page: Long): Result<People>
+    suspend fun  getProfileById( id: Long): People
     suspend fun  getVehicles(): List<Vehicles>
     suspend fun  getFilms(): List<Films>
     suspend fun  getPlants(): List<Planets>

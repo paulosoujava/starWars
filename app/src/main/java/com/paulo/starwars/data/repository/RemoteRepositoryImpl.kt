@@ -20,13 +20,15 @@ class RemoteRepositoryImpl(
 
 
     override suspend fun getPeoples(page: Long): Result<People> {
-
         val result = api.getPeople(page)
         val list = result.results.map { it.toDomain() }
         val count = result.count
         return Result(count = count, results = list)
     }
 
+    override suspend fun getProfileById(id: Long): People {
+        return api.getProfileById(id).toDomain()
+    }
     override suspend fun getVehicles(): List<Vehicles> {
         TODO()
     }

@@ -5,6 +5,7 @@ import com.paulo.starwars.data.repository.RemoteRepositoryImpl
 import com.paulo.starwars.domain.repository.IRemoteRepository
 import com.paulo.starwars.domain.usecases.list.GetHomeUseCase
 import com.paulo.starwars.domain.usecases.listItem.GetListItemDetailUseCase
+import com.paulo.starwars.domain.usecases.profile.GetProfileUseCase
 import com.paulo.starwars.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -31,6 +32,12 @@ object AppModule {
     @Provides
     @Singleton
     fun provideListUseCases() = GetHomeUseCase()
+
+    @Provides
+    @Singleton
+    fun provideProfileUseCases(
+        repository: IRemoteRepository
+    ) = GetProfileUseCase( repository =  repository)
 
 
     @Provides

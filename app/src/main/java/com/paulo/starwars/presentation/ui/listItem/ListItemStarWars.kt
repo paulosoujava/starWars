@@ -1,6 +1,7 @@
 package com.paulo.starwars.presentation.ui.listItem
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -101,12 +102,15 @@ private fun ContentRegular(
         modifier = Modifier.padding(top = 120.dp),
         columns = GridCells.Adaptive(150.dp),
         content = {
+
             itemsIndexed(viewModel.uiStateList.value.success!!.results) { i, people ->
+                val imageUrl = "${Constants.BASE_PATH_CHARACTERES}${i + 1 + currentLimitPageToIndexPhoto.value}.jpg"
                 ListItemCardStarWars(
                     title = people.name,
-                    urlImage = "${Constants.BASE_PATH_CHARACTERES}${i + 1 + currentLimitPageToIndexPhoto.value}.jpg"
+                    urlImage = imageUrl
                 ) {
-                    navController.navigate(Constants.PROFILE_PAGE)
+                    navController.navigate(
+                        route = "${Constants.PROFILE_PAGE}/${i + 1 + currentLimitPageToIndexPhoto.value}.jpg")
                 }
             }
         }
