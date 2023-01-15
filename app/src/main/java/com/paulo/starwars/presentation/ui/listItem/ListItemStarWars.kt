@@ -110,7 +110,8 @@ private fun ContentRegular(
                     urlImage = imageUrl
                 ) {
                     navController.navigate(
-                        route = "${Constants.PROFILE_PAGE}/${i + 1 + currentLimitPageToIndexPhoto.value}.jpg")
+                        route = "${Constants.PROFILE_PAGE}/${i + 1 + currentLimitPageToIndexPhoto.value}.jpg/$i"
+                    )
                 }
             }
         }

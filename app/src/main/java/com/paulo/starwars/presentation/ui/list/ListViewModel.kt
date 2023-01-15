@@ -16,7 +16,6 @@ class ListViewModel @Inject constructor(
     private val useCases: GetHomeUseCase
 ) : ViewModel() {
 
-
     var uiStateList = MutableStateFlow(UiStateList())
         private set
 

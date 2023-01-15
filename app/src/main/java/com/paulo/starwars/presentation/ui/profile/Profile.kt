@@ -1,6 +1,8 @@
 package com.paulo.starwars.presentation.ui.profile
 
-import android.util.Log
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -15,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -24,7 +27,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,6 +37,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,7 +46,11 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.paulo.starwars.R
+import com.paulo.starwars.core.Events
+import com.paulo.starwars.domain.models.People
+import com.paulo.starwars.presentation.ui.commom.ErrorState
 import com.paulo.starwars.presentation.ui.commom.ImageCoil
+import com.paulo.starwars.presentation.ui.commom.Loading
 import com.paulo.starwars.presentation.ui.commom.TopBar
 import com.paulo.starwars.utils.Constants
 
@@ -50,17 +58,56 @@ import com.paulo.starwars.utils.Constants
 @Composable
 fun Profile(
     navController: NavHostController,
-    urlPhoto: String?
+    urlPhoto: String?,
+    code: String?
 ) {
 
     val viewModel = hiltViewModel<ProfileViewModel>()
-    LaunchedEffect(key1 = Unit){
-        //viewModel.fetchData()
+    val state = viewModel.uiState.collectAsState()
+
+    if (code == null) {
+        ErrorState(
+            navController = navController,
+            "Ops, the code has invaliable!!"
+        )
+        return
     }
+
+    viewModel.fetchData(code)
+
+    when (state.value.stateUi) {
+        is Events.Error -> ErrorState(navController = navController)
+        Events.Loading -> Loading()
+        Events.Regular -> {
+            val people = state.value.people
+            if (people != null) {
+                RegularContent(
+                    people = people,
+                    navController = navController,
+                    urlPhoto = urlPhoto ?: Constants.NO_PHOTO
+                )
+            } else {
+                ErrorState(navController = navController)
+            }
+        }
+    }
+
+
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun RegularContent(
+    people: People,
+    navController: NavHostController,
+    urlPhoto: String
+) {
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
-            TopBar(title = "Luke Skywalker") {
+            TopBar(title = people.name) {
                 navController.popBackStack()
             }
         }
@@ -87,28 +134,35 @@ fun Profile(
                     ImageCoil("${Constants.BASE_PATH_CHARACTERES}$urlPhoto")
                 }
                 Column(horizontalAlignment = Alignment.Start) {
-                    Link(text = "Birth Year:", link = " 19BBY", hasLink = false)
-                    Link(text = "Species:", link = " Unknown", hasLink = false)
-                    Link(text = "Height:", link = " 172cm", hasLink = false)
-                    Link(text = "Mass:", link = " 77kg", hasLink = false)
-                    Link(text = "Gender:", link = " Male", hasLink = false)
-                    Link(text = "Hair Color:", link = " Blond", hasLink = false)
-                    Link(text = "Skin Color:", link = " Fair", hasLink = false)
-                    Link(text = "Homeworld", link = " Tatooine", hasLink = true, action = {})
+                    Link(label = "Birth Year: ", text = people.birthYear, hasLink = false)
+                    if (people.species.isNotEmpty())
+                        Link(label = "", text = "Species: ", hasLink = true, action = {
+                            Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG).show()
+                        })
+                    Link(label = "Height: ", text = people.height, hasLink = false)
+                    Link(label = "Mass: ", text = people.mass, hasLink = false)
+                    Link(label = "Gender: ", text = people.gender, hasLink = false)
+                    Link(label = "Hair Color: ", text = people.hairColor, hasLink = false)
+                    Link(label = "Skin Color: ", text = people.skinColor, hasLink = false)
+                    if (people.homeworld.isNotEmpty())
+                        Link(label = "", text = "Homeworld: ", hasLink = true, action = {
+                            Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG).show()
+                        })
 
                 }
 
             }
-           ListRelated(title = "Related Films")
-            ListRelated(title = "Related Vehicles")
-           ListRelated(title = "Related Starships")
+            ListRelated(title = "Related Films", people.species, Constants.SPECIES)
+            ListRelated(title = "Related Vehicles", people.vehicles, Constants.VEHICLES)
+            ListRelated(title = "Related Starships", people.starships, Constants.PEOPLE)
 
         }
     }
 }
 
+
 @Composable
-fun ListRelated(title: String) {
+fun ListRelated(title: String, items: List<String>, type: String) {
     Column {
         Spacer(modifier = Modifier.height(15.dp))
         Text(
@@ -120,19 +174,29 @@ fun ListRelated(title: String) {
                 .background(Color.Black)
                 .padding(10.dp)
         )
-        LazyRow(
-            state = rememberLazyListState(),
-        ) {
-            items(10) { columnIndex ->
-                RelatedCard("Episode IV: A New Hope $columnIndex")
+        if (items.isEmpty()) {
+            Text(
+                text = "There are no related items for this category",
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+            )
+        } else {
+            LazyRow(
+                state = rememberLazyListState(),
+            ) {
+                items(items) { item ->
+                    RelatedCard(item, type)
+                }
             }
         }
+
     }
 }
 
 
 @Composable
-fun Link(text: String, link: String, hasLink: Boolean = false, action: () -> Unit = {}) {
+fun Link(label: String, text: String, hasLink: Boolean = false, action: () -> Unit = {}) {
 
     val interactionSource = remember { MutableInteractionSource() }
 
@@ -143,10 +207,10 @@ fun Link(text: String, link: String, hasLink: Boolean = false, action: () -> Uni
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = text, color = Color.White)
+        Text(text = label, color = Color.White)
         if (hasLink)
             Text(
-                text = link,
+                text = "Click here",
                 modifier = Modifier
                     .clickable(
                         interactionSource = interactionSource,
@@ -162,7 +226,9 @@ fun Link(text: String, link: String, hasLink: Boolean = false, action: () -> Uni
 }
 
 @Composable
-fun RelatedCard(msg: String) {
+fun RelatedCard(path: String, type: String) {
+    val path = path.takeLast(2)
+
     Row(
         modifier = Modifier
             .padding(all = 5.dp)
@@ -174,7 +240,7 @@ fun RelatedCard(msg: String) {
 
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data("https://starwars-visualguide.com/assets/img/films/1.jpg")
+                .data("${Constants.URL_BASE_IMAGE}/$type/${path.take(1)}.jpg")
                 .crossfade(true)
                 .placeholder(R.drawable.placeholder)
                 .build(),
@@ -183,15 +249,6 @@ fun RelatedCard(msg: String) {
             modifier = Modifier
                 .size(80.dp)
                 .clip(CircleShape)
-        )
-        Spacer(modifier = Modifier.width(5.dp))
-
-
-        Text(
-            text = msg.take(30),
-            style = TextStyle(fontSize = 15.sp, color = Color.White),
-            maxLines = 1,
-            overflow = TextOverflow.Clip
         )
 
         Spacer(modifier = Modifier.width(5.dp))

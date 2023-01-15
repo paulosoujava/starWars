@@ -2,7 +2,6 @@
 
 package com.paulo.starwars.presentation
 
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,12 +11,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.paulo.starwars.presentation.ui.list.ListStarWars
 import com.paulo.starwars.presentation.ui.listItem.ListItemStarWars
 import com.paulo.starwars.presentation.ui.profile.Profile
@@ -31,12 +27,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            val splashScreen = installSplashScreen()
-            splashScreen.setKeepOnScreenCondition { false }
-        }
-
 
         setContent {
 
@@ -64,14 +54,12 @@ class MainActivity : ComponentActivity() {
                         }
                         //${Constants.PROFILE_PAGE}/$imageUrl
                         composable(
-                            "${Constants.PROFILE_PAGE}/{imageUrl}",
-                            arguments = listOf(navArgument("imageUrl") {
-                                defaultValue = "https://starwars-visualguide.com/assets/img/characters/3.jpg"
-                            })
+                            "${Constants.PROFILE_PAGE}/{imageUrl}/{code}"
                         ) { backStackEntry ->
                             Profile(
                                 navController = navController,
-                                backStackEntry.arguments?.getString("imageUrl")
+                                backStackEntry.arguments?.getString("imageUrl"),
+                                backStackEntry.arguments?.getString("code"),
                             )
                         }
                     }
