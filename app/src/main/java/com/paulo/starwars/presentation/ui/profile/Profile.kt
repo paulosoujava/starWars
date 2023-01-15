@@ -2,6 +2,7 @@ package com.paulo.starwars.presentation.ui.profile
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -134,27 +135,27 @@ private fun RegularContent(
                     ImageCoil("${Constants.BASE_PATH_CHARACTERES}$urlPhoto")
                 }
                 Column(horizontalAlignment = Alignment.Start) {
-                    Link(label = "Birth Year: ", text = people.birthYear, hasLink = false)
+                    Link(label = stringResource(R.string.birth_year), text = people.birthYear, hasLink = false)
                     if (people.species.isNotEmpty())
-                        Link(label = "", text = "Species: ", hasLink = true, action = {
+                        Link(label = stringResource(R.string.species), text = "", hasLink = true, action = {
                             Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG).show()
                         })
-                    Link(label = "Height: ", text = people.height, hasLink = false)
-                    Link(label = "Mass: ", text = people.mass, hasLink = false)
-                    Link(label = "Gender: ", text = people.gender, hasLink = false)
-                    Link(label = "Hair Color: ", text = people.hairColor, hasLink = false)
-                    Link(label = "Skin Color: ", text = people.skinColor, hasLink = false)
+                    Link(label = stringResource(R.string.height), text = people.height, hasLink = false)
+                    Link(label = stringResource(R.string.mass), text = people.mass, hasLink = false)
+                    Link(label = stringResource(R.string.gender), text = people.gender, hasLink = false)
+                    Link(label = stringResource(R.string.hair_color), text = people.hairColor, hasLink = false)
+                    Link(label = stringResource(R.string.skin_color), text = people.skinColor, hasLink = false)
                     if (people.homeworld.isNotEmpty())
-                        Link(label = "", text = "Homeworld: ", hasLink = true, action = {
+                        Link(label = stringResource(R.string.homeworld), text = "", hasLink = true, action = {
                             Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG).show()
                         })
 
                 }
 
             }
-            ListRelated(title = "Related Films", people.species, Constants.SPECIES)
-            ListRelated(title = "Related Vehicles", people.vehicles, Constants.VEHICLES)
-            ListRelated(title = "Related Starships", people.starships, Constants.PEOPLE)
+            ListRelated(title = stringResource(R.string.related_films), people.films, Constants.FILMS)
+            ListRelated(title = stringResource(R.string.related_vehicles), people.vehicles, Constants.VEHICLES)
+            ListRelated(title = stringResource(R.string.related_starships), people.starships, Constants.STARSHIPS)
 
         }
     }
@@ -185,8 +186,8 @@ fun ListRelated(title: String, items: List<String>, type: String) {
             LazyRow(
                 state = rememberLazyListState(),
             ) {
-                items(items) { item ->
-                    RelatedCard(item, type)
+                items(items.size) { item ->
+                    RelatedCard(items[item], type)
                 }
             }
         }
@@ -227,7 +228,7 @@ fun Link(label: String, text: String, hasLink: Boolean = false, action: () -> Un
 
 @Composable
 fun RelatedCard(path: String, type: String) {
-    val path = path.takeLast(2)
+    var result = path.filter { it.isDigit() }
 
     Row(
         modifier = Modifier
@@ -237,10 +238,9 @@ fun RelatedCard(path: String, type: String) {
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
-                .data("${Constants.URL_BASE_IMAGE}/$type/${path.take(1)}.jpg")
+                .data("${Constants.URL_BASE_IMAGE}$type/$result.jpg")
                 .crossfade(true)
                 .placeholder(R.drawable.placeholder)
                 .build(),

@@ -8,4 +8,16 @@
     <string name="pesquisar">Pesquisar</string>
     <string name="message_error">Ops o lado negro da força atuou neste momento.\nPor favor tente mais tarde.</string>
     <string name="all_label">TODOS</string>
+    <string name="birth_year">"Birth Year: "</string>
+    <string name="not_implemented">Not implemented</string>
+    <string name="species">"Species: "</string>
+    <string name="height">"Height: "</string>
+    <string name="gender">"Gender: "</string>
+    <string name="hair_color">"Hair Color: "</string>
+    <string name="skin_color">"Skin Color: "</string>
+    <string name="mass">"Mass: "</string>
+    <string name="related_films">Related Films</string>
+    <string name="related_starships">Related Starships</string>
+    <string name="related_vehicles">Related Vehicles</string>
+    <string name="homeworld">"Homeworld: "</string>
 </resources>
