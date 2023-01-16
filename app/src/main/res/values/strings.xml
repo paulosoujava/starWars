@@ -23,4 +23,9 @@
     <string name="favorite">Favorite</string>
     <string name="undo">Undo</string>
     <string name="get_back">Get back</string>
+    <string name="ops_this_is_a_empty_list">Ops, this is a empty list.</string>
+    <string name="okay_delete">Okay, DELETE</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="delete_this_item">Delete this item?</string>
+    <string name="exit">Exit</string>
 </resources>

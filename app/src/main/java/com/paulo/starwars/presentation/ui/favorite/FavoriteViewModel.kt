@@ -26,10 +26,9 @@ data class FavoriteViewModel @Inject constructor(
 
     }
 
-    fun remove(favorite: Favorite) {
+    fun remove() {
         viewModelScope.launch(Dispatchers.IO) {
-            deletedFavorite = favorite
-            useCase.deleteFavoriteUseCase(favorite.id.toString())
+            useCase.deleteFavoriteUseCase(deletedFavorite.id.toString())
             getFavorite()
         }
 
@@ -46,6 +45,10 @@ data class FavoriteViewModel @Inject constructor(
             useCase.addFavoriteUseCase(deletedFavorite)
             getFavorite()
         }
+    }
+
+    fun waitDecisionToDelete(favorite: Favorite) {
+        deletedFavorite = favorite
     }
 
 }
