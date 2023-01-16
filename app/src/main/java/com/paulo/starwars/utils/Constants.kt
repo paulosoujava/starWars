@@ -4,25 +4,27 @@ class Constants {
     companion object {
 
         //@todo remover duplicidade de urls
-        val BASE_PATH_CHARACTERES= "https://starwars-visualguide.com/assets/img/characters/"
-        val URL_BASE_TO_IMAGE = "https://starwars-visualguide.com/assets/img/categories/"
-        val URL_BASE_IMAGE = "https://starwars-visualguide.com/assets/img/"
+        const val BASE_PATH_CHARACTERES= "https://starwars-visualguide.com/assets/img/characters/"
+        const val URL_BASE_TO_IMAGE = "https://starwars-visualguide.com/assets/img/categories/"
+        const val URL_BASE_IMAGE = "https://starwars-visualguide.com/assets/img/"
 
-        val BASE_URL= "https://swapi.dev/api/"
+        const val BASE_URL= "https://swapi.dev/api/"
 
-        val NO_PHOTO = "https://www.rubymaejewelry.com/wp-content/uploads/2010/07/placeholder.jpg"
+        const val NO_PHOTO = "https://www.rubymaejewelry.com/wp-content/uploads/2010/07/placeholder.jpg"
 
-        val CATEGORIES ="categories"
-        val CHARACTERS ="character"
-        val PLANETS ="planets"
-        val SPECIES ="species"
-        val VEHICLES ="vehicles"
-        val STARSHIPS ="starships"
-        val TIMELINE_PAGE ="timeline"
-        val ITEM_PAGE ="item"
-        val PROFILE_PAGE ="profile"
-        val FILMS ="films"
-        val PEOPLE ="people"
+        const  val CATEGORIES ="categories"
+        const val CHARACTERS ="character"
+        const val PLANETS ="planets"
+        const val SPECIES ="species"
+        const val VEHICLES ="vehicles"
+        const val STARSHIPS ="starships"
+        const val TIMELINE_PAGE ="timeline"
+        const val ITEM_PAGE ="item"
+        const val PROFILE_PAGE ="profile"
+        const val FILMS ="films"
+        const val PEOPLE ="people"
+        const val FAVORITE_DB ="favorite"
+
 
     }
 }

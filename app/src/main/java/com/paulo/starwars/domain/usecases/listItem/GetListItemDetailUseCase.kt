@@ -1,6 +1,6 @@
 package com.paulo.starwars.domain.usecases.listItem
 
-import com.paulo.starwars.data.Result
+import com.paulo.starwars.data.framework.network.Result
 import com.paulo.starwars.domain.models.People
 import com.paulo.starwars.domain.repository.IRemoteRepository
 import retrofit2.HttpException

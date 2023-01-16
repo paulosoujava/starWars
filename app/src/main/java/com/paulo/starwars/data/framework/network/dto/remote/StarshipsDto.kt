@@ -1,4 +1,4 @@
-package com.paulo.starwars.data.dto.remote
+package com.paulo.starwars.data.framework.network.dto.remote
 
 import com.google.gson.annotations.SerializedName
 import com.paulo.starwars.domain.models.Films

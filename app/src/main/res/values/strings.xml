@@ -20,4 +20,5 @@
     <string name="related_starships">Related Starships</string>
     <string name="related_vehicles">Related Vehicles</string>
     <string name="homeworld">"Homeworld: "</string>
+    <string name="favorite">Favorite</string>
 </resources>

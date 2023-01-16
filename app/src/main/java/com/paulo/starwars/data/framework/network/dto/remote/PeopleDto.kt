@@ -1,4 +1,4 @@
-package com.paulo.starwars.data.dto.remote
+package com.paulo.starwars.data.framework.network.dto.remote
 
 import com.google.gson.annotations.SerializedName
 import com.paulo.starwars.domain.models.Films
@@ -29,21 +29,21 @@ data class PeopleDto(
     val starships: List<String>?,
 ) {
     fun toDomain() = People(
-        birthYear?: "",
-        eyeColor?: "" ,
-        gender?: "",
-        hairColor?: "",
-        height?: "",
-        homeworld?: "",
-        mass?: "",
-        name?: "",
-        skinColor?: "",
-        created?: "",
-        edited?: "",
-        url?: "",
-        films = if(films.isNullOrEmpty()) emptyList() else films ,
-        species= if(species.isNullOrEmpty()) emptyList() else species ,
-        starships= if(starships.isNullOrEmpty()) emptyList() else starships ,
-        vehicles= if(vehicles.isNullOrEmpty()) emptyList() else vehicles ,
+        birthYear = birthYear ?: "",
+        eyeColor = eyeColor ?: "",
+        gender = gender ?: "",
+        hairColor = hairColor ?: "",
+        height = height ?: "",
+        homeworld = homeworld ?: "",
+        mass = mass ?: "",
+        name = name ?: "",
+        skinColor = skinColor ?: "",
+        created = created ?: "",
+        edited = edited ?: "",
+        url = url ?: "",
+        films = if (films.isNullOrEmpty()) emptyList() else films,
+        species = if (species.isNullOrEmpty()) emptyList() else species,
+        starships = if (starships.isNullOrEmpty()) emptyList() else starships,
+        vehicles = if (vehicles.isNullOrEmpty()) emptyList() else vehicles,
     )
 }

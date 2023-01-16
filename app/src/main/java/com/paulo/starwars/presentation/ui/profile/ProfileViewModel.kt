@@ -1,13 +1,10 @@
 package com.paulo.starwars.presentation.ui.profile
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paulo.starwars.core.Events
-import com.paulo.starwars.data.Result
 import com.paulo.starwars.domain.models.People
 import com.paulo.starwars.domain.usecases.profile.GetProfileUseCase
-import com.paulo.starwars.presentation.ui.listItem.UiStateListItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update

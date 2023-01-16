@@ -1,11 +1,7 @@
-package com.paulo.starwars.data.repository
+package com.paulo.starwars.data.framework.network
 
 
-import android.util.Log
-import com.paulo.starwars.data.Api
-import com.paulo.starwars.data.Result
 import com.paulo.starwars.domain.models.Films
-import com.paulo.starwars.domain.models.Home
 import com.paulo.starwars.domain.models.People
 import com.paulo.starwars.domain.models.Planets
 import com.paulo.starwars.domain.models.Species

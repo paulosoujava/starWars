@@ -1,9 +1,7 @@
 package com.paulo.starwars.domain.repository
 
-import com.paulo.starwars.data.Result
-import com.paulo.starwars.data.dto.remote.PeopleDto
+import com.paulo.starwars.data.framework.network.Result
 import com.paulo.starwars.domain.models.Films
-import com.paulo.starwars.domain.models.Home
 import com.paulo.starwars.domain.models.People
 import com.paulo.starwars.domain.models.Planets
 import com.paulo.starwars.domain.models.Species

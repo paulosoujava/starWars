@@ -1,16 +1,11 @@
-package com.paulo.starwars.data
+package com.paulo.starwars.data.framework.network
 
-import com.paulo.starwars.data.dto.remote.FilmsDto
-import com.paulo.starwars.data.dto.remote.PeopleDto
-import com.paulo.starwars.data.dto.remote.PlanetsDto
-import com.paulo.starwars.data.dto.remote.SpeciesDto
-import com.paulo.starwars.data.dto.remote.StarshipsDto
-import com.paulo.starwars.data.dto.remote.VehiclesDto
-import com.paulo.starwars.domain.models.Films
-import com.paulo.starwars.domain.models.Planets
-import com.paulo.starwars.domain.models.Species
-import com.paulo.starwars.domain.models.Starships
-import com.paulo.starwars.domain.models.Vehicles
+import com.paulo.starwars.data.framework.network.dto.remote.FilmsDto
+import com.paulo.starwars.data.framework.network.dto.remote.PeopleDto
+import com.paulo.starwars.data.framework.network.dto.remote.PlanetsDto
+import com.paulo.starwars.data.framework.network.dto.remote.SpeciesDto
+import com.paulo.starwars.data.framework.network.dto.remote.StarshipsDto
+import com.paulo.starwars.data.framework.network.dto.remote.VehiclesDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -19,7 +14,6 @@ import retrofit2.http.Query
 interface Api {
     @GET("people")
     suspend fun getPeople(@Query("page") page: Long): Result<PeopleDto>
-
 
     @GET("people/{id}")
     suspend fun getProfileById(@Path("id") id: Long): PeopleDto

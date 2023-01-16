@@ -1,7 +1,6 @@
 package com.paulo.starwars.presentation.ui.listItem
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,7 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.paulo.starwars.R
 import com.paulo.starwars.core.Events
-import com.paulo.starwars.data.Result
+import com.paulo.starwars.data.framework.network.Result
 import com.paulo.starwars.domain.models.People
 import com.paulo.starwars.presentation.ui.commom.ErrorState
 import com.paulo.starwars.presentation.ui.commom.Loading

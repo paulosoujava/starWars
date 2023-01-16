@@ -1,9 +1,8 @@
 package com.paulo.starwars.presentation.ui.profile
 
-import android.content.Intent
-import android.net.Uri
-import android.util.Log
+import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -12,19 +11,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,10 +36,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -74,7 +73,7 @@ fun Profile(
         return
     }
 
-    viewModel.fetchData(code)
+        viewModel.fetchData(if(code.toInt()== 0) "1" else code)
 
     when (state.value.stateUi) {
         is Events.Error -> ErrorState(navController = navController)
@@ -121,6 +120,7 @@ private fun RegularContent(
                     bottom = it.calculateBottomPadding()
                 )
         ) {
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -135,30 +135,102 @@ private fun RegularContent(
                     ImageCoil("${Constants.BASE_PATH_CHARACTERES}$urlPhoto")
                 }
                 Column(horizontalAlignment = Alignment.Start) {
-                    Link(label = stringResource(R.string.birth_year), text = people.birthYear, hasLink = false)
+                    Link(
+                        label = stringResource(R.string.birth_year),
+                        text = people.birthYear,
+                        hasLink = false
+                    )
                     if (people.species.isNotEmpty())
-                        Link(label = stringResource(R.string.species), text = "", hasLink = true, action = {
-                            Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG).show()
-                        })
-                    Link(label = stringResource(R.string.height), text = people.height, hasLink = false)
-                    Link(label = stringResource(R.string.mass), text = people.mass, hasLink = false)
-                    Link(label = stringResource(R.string.gender), text = people.gender, hasLink = false)
-                    Link(label = stringResource(R.string.hair_color), text = people.hairColor, hasLink = false)
-                    Link(label = stringResource(R.string.skin_color), text = people.skinColor, hasLink = false)
+                        Link(
+                            label = stringResource(R.string.species),
+                            text = "",
+                            hasLink = true,
+                            action = {
+                                Toast(context)
+                            })
+                    Link(
+                        label = stringResource(R.string.height),
+                        text = people.height,
+                        hasLink = false
+                    )
+                    Link(
+                        label = stringResource(R.string.mass),
+                        text = people.mass,
+                        hasLink = false
+                    )
+                    Link(
+                        label = stringResource(R.string.gender),
+                        text = people.gender,
+                        hasLink = false
+                    )
+                    Link(
+                        label = stringResource(R.string.hair_color),
+                        text = people.hairColor,
+                        hasLink = false
+                    )
+                    Link(
+                        label = stringResource(R.string.skin_color),
+                        text = people.skinColor,
+                        hasLink = false
+                    )
                     if (people.homeworld.isNotEmpty())
-                        Link(label = stringResource(R.string.homeworld), text = "", hasLink = true, action = {
-                            Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG).show()
-                        })
+                        Link(
+                            label = stringResource(R.string.homeworld),
+                            text = "",
+                            hasLink = true,
+                            action = {
+                                Toast(context)
+                            })
 
                 }
 
             }
-            ListRelated(title = stringResource(R.string.related_films), people.films, Constants.FILMS)
-            ListRelated(title = stringResource(R.string.related_vehicles), people.vehicles, Constants.VEHICLES)
-            ListRelated(title = stringResource(R.string.related_starships), people.starships, Constants.STARSHIPS)
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.Bottom
+            ) {
+                IconButton(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(50.dp))
+                        .background(Color.Red)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.baseline_favorite_border_24),
+                        contentDescription = stringResource(R.string.favorite)
+                    )
+                }
+            }
+
+
+            ListRelated(
+                title = stringResource(R.string.related_films),
+                people.films,
+                Constants.FILMS
+            )
+            ListRelated(
+                title = stringResource(R.string.related_vehicles),
+                people.vehicles,
+                Constants.VEHICLES
+            )
+            ListRelated(
+                title = stringResource(R.string.related_starships),
+                people.starships,
+                Constants.STARSHIPS
+            )
 
         }
     }
+}
+
+@Composable
+private fun Toast(context: Context) {
+    Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG)
+        .show()
 }
 
 
@@ -228,12 +300,13 @@ fun Link(label: String, text: String, hasLink: Boolean = false, action: () -> Un
 
 @Composable
 fun RelatedCard(path: String, type: String) {
-    var result = path.filter { it.isDigit() }
+    val result = path.filter { it.isDigit() }
 
     Row(
         modifier = Modifier
             .padding(all = 5.dp)
-            .clip(RoundedCornerShape(10.dp))
+            .size(80.dp)
+            .clip(CircleShape)
             .background(Color.Black),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically

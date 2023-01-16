@@ -1,14 +1,12 @@
 package com.paulo.starwars.presentation.ui.listItem
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.paulo.starwars.core.Events
-import com.paulo.starwars.data.Result
+import com.paulo.starwars.data.framework.network.Result
 import com.paulo.starwars.domain.models.People
 import com.paulo.starwars.domain.usecases.listItem.GetListItemDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch

@@ -1,7 +1,6 @@
 package com.paulo.starwars.presentation.ui.profile
 
 import com.paulo.starwars.core.Events
-import com.paulo.starwars.data.Result
 import com.paulo.starwars.domain.models.People
 
 data class UiStateProfile(

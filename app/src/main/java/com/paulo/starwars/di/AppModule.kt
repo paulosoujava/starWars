@@ -1,7 +1,13 @@
 package com.paulo.starwars.di
 
-import com.paulo.starwars.data.Api
-import com.paulo.starwars.data.repository.RemoteRepositoryImpl
+import android.content.Context
+import androidx.room.Room
+import com.paulo.starwars.data.framework.bd.FavoriteDB
+import com.paulo.starwars.data.framework.network.Api
+import com.paulo.starwars.data.framework.bd.FavoriteDao
+import com.paulo.starwars.data.framework.bd.LocalRepositoryImpl
+import com.paulo.starwars.data.framework.network.RemoteRepositoryImpl
+import com.paulo.starwars.domain.repository.ILocalRepository
 import com.paulo.starwars.domain.repository.IRemoteRepository
 import com.paulo.starwars.domain.usecases.list.GetHomeUseCase
 import com.paulo.starwars.domain.usecases.listItem.GetListItemDetailUseCase
@@ -10,6 +16,7 @@ import com.paulo.starwars.utils.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -52,5 +59,26 @@ object AppModule {
         return RemoteRepositoryImpl(api)
     }
 
+    @Provides
+    fun provideFavoreteDb(
+        @ApplicationContext
+        context : Context
+    ) = Room.databaseBuilder(
+        context,
+        FavoriteDB::class.java,
+        Constants.PEOPLE
+    ).build()
+
+    @Provides
+    fun provideBookDao(
+        db: FavoriteDB
+    ) = db.bookDao()
+
+    @Provides
+    fun provideBookRepository(
+        dao: FavoriteDao
+    ): ILocalRepository = LocalRepositoryImpl(
+        dao = dao
+    )
 
 }

@@ -1,7 +1,7 @@
 package com.paulo.starwars.presentation.ui.listItem
 
 import com.paulo.starwars.core.Events
-import com.paulo.starwars.data.Result
+import com.paulo.starwars.data.framework.network.Result
 import com.paulo.starwars.domain.models.People
 
 data class UiStateListItem(
