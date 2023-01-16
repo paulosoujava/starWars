@@ -2,6 +2,7 @@
 
 Neste projeto foi usado o clean architecture, que nada mais é que separar as camadas
 por suas responsabilidades, exemplo:
+__________
  - Camada DATA:
    - responsável pelo banco de dados, acesso a internet e Banco de dados 
  - Camada DOMAIN:
@@ -9,8 +10,10 @@ por suas responsabilidades, exemplo:
  - Camada PRESENTATION: 
    - Responsável pela interface do aplicativo e a exibição dos dados recebidos do domínio
 
-Eis a disposição das pastas:
-    pg1
+
+## Eis a disposição das pastas:
+<img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg6.png"  width="100"/>
+
 Foi usado o retrofit para dados Remotos
 Foi usado o room pada banco de dados
 
@@ -43,25 +46,35 @@ Melhorias:
   - Implementar o broadcast da conexão com a iternet, para determinar se pega do cache
   -  Usar um Interceptor para fazer cache ou o room
 
-Falta:
-    Testes 
-
-Screens:
-
-Documentation:
-https://starwars-visualguide.com/#/
-https://swapi.dev/documentation#root
+Falta: Testes 
 
 
-Tags:
-Jetpack Compose
-Room
-Retrofit
-Flow
-MVI
-Clean Architecture
-DI
-SOLID
+
+
+## Screens:
+  <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg1.png"  width="300"/>
+    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg2.png"  width="300"/>
+    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg3.png"  width="300"/>
+    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg4.png"  width="300"/>
+    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg5.png"  width="300"/>
+    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg7.png"  width="300"/>
+    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg8.png"  width="300"/>
+                    
+
+## Documentation:
+ - https://starwars-visualguide.com/#/
+ - https://swapi.dev/documentation#root
+
+
+## Tags:
+ - Jetpack Compose
+ - Room
+ - Retrofit
+ - Flow
+ - MVI
+ - Clean Architecture
+ - DI
+ - SOLID
 
 
 
