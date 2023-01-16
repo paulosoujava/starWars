@@ -4,11 +4,18 @@ Neste projeto foi usado o clean architecture, que nada mais é que separar as ca
 por suas responsabilidades, exemplo:
 __________
  - Camada DATA:
-   - responsável pelo banco de dados, acesso a internet e Banco de dados 
+   -  contém implementações de repositório e 1 ou várias fontes de dados. Os repositórios são responsáveis ​​por coordenar os dados das diferentes fontes de dados. A Camada de Dados depende da Camada de Domínio.
+
+
  - Camada DOMAIN:
-   - responsável pelas entidades e as regras de domínio específicas do seu projeto. Esse módulo deve ser totalmente independente da plataforma Android.
- - Camada PRESENTATION: 
-   - Responsável pela interface do aplicativo e a exibição dos dados recebidos do domínio
+   - é a parte mais INTERNA da cebola (sem dependências com outras camadas) e contémEntidades, casos de uso e interfaces de repositório.Os casos de uso combinam dados de 1 ou várias interfaces de repositório.
+
+- Camada PRESENTATION: 
+   - contém UI (Atividades e Fragmentos) que são coordenados por Apresentadores/ViewModels que executam 1 ou vários casos de uso. A Camada de Apresentação depende da Camada de Domínio.
+
+
+- [FONTE](https://breakdance.github.io/breakdance/](https://proandroiddev.com/clean-architecture-data-flow-dependency-rule-615ffdd79e29)) - clean Architecture
+
 
 
 ## Eis a disposição das pastas:
