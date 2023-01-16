@@ -11,9 +11,9 @@ import com.paulo.starwars.domain.repository.ILocalRepository
 import com.paulo.starwars.domain.repository.IRemoteRepository
 import com.paulo.starwars.domain.usecases.list.GetHomeUseCase
 import com.paulo.starwars.domain.usecases.listItem.GetListItemDetailUseCase
-import com.paulo.starwars.domain.usecases.common.AddFavoriteUseCase
-import com.paulo.starwars.domain.usecases.common.DeleteFavoriteUseCase
-import com.paulo.starwars.domain.usecases.profile.GetFavoriteByCodeUseCase
+import com.paulo.starwars.domain.usecases.favorite.AddFavoriteUseCase
+import com.paulo.starwars.domain.usecases.favorite.DeleteFavoriteUseCase
+import com.paulo.starwars.domain.usecases.favorite.GetFavoriteByCodeUseCase
 import com.paulo.starwars.domain.usecases.profile.GetProfileUseCase
 import com.paulo.starwars.domain.usecases.favorite.GetFavoriteUseCase
 import com.paulo.starwars.utils.Constants

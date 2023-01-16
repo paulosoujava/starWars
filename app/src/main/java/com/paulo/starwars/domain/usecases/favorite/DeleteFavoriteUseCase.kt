@@ -1,4 +1,4 @@
-package com.paulo.starwars.domain.usecases.common
+package com.paulo.starwars.domain.usecases.favorite
 
 import com.paulo.starwars.domain.models.Favorite
 import com.paulo.starwars.domain.repository.ILocalRepository

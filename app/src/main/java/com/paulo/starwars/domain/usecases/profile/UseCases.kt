@@ -1,7 +1,8 @@
 package com.paulo.starwars.domain.usecases.profile
 
-import com.paulo.starwars.domain.usecases.common.AddFavoriteUseCase
-import com.paulo.starwars.domain.usecases.common.DeleteFavoriteUseCase
+import com.paulo.starwars.domain.usecases.favorite.AddFavoriteUseCase
+import com.paulo.starwars.domain.usecases.favorite.DeleteFavoriteUseCase
+import com.paulo.starwars.domain.usecases.favorite.GetFavoriteByCodeUseCase
 
 data class UseCases(
      val addFavoriteUseCase: AddFavoriteUseCase,
