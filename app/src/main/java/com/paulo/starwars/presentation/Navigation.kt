@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.paulo.starwars.presentation.ui.favorite.Favorite
 import com.paulo.starwars.presentation.ui.list.ListStarWars
 import com.paulo.starwars.presentation.ui.listItem.ListItemStarWars
 import com.paulo.starwars.presentation.ui.profile.Profile
@@ -22,7 +23,7 @@ import com.paulo.starwars.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class Navigation : ComponentActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,14 +53,19 @@ class MainActivity : ComponentActivity() {
                         ) {
                             ListItemStarWars(navController = navController)
                         }
-                        //${Constants.PROFILE_PAGE}/$imageUrl
+                        composable(
+                            route = Constants.FAVORITE
+                        ) {
+                            Favorite(navController = navController)
+                        }
                         composable(
                             "${Constants.PROFILE_PAGE}/{imageUrl}/{code}"
                         ) { backStackEntry ->
+                            val code = backStackEntry.arguments?.getString("code")
                             Profile(
                                 navController = navController,
                                 backStackEntry.arguments?.getString("imageUrl"),
-                                backStackEntry.arguments?.getString("code"),
+                                code ?: "invalid",
                             )
                         }
                     }

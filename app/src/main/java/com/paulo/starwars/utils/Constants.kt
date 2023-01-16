@@ -12,7 +12,7 @@ class Constants {
 
         const val NO_PHOTO = "https://www.rubymaejewelry.com/wp-content/uploads/2010/07/placeholder.jpg"
 
-        const  val CATEGORIES ="categories"
+        const  val FAVORITE ="listFavorite"
         const val CHARACTERS ="character"
         const val PLANETS ="planets"
         const val SPECIES ="species"

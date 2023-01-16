@@ -21,4 +21,6 @@
     <string name="related_vehicles">Related Vehicles</string>
     <string name="homeworld">"Homeworld: "</string>
     <string name="favorite">Favorite</string>
+    <string name="undo">Undo</string>
+    <string name="get_back">Get back</string>
 </resources>

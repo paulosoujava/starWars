@@ -2,12 +2,12 @@ package com.paulo.starwars.domain.repository
 
 
 import com.paulo.starwars.domain.models.Favorite
-import com.paulo.starwars.domain.models.People
-import kotlinx.coroutines.flow.Flow
 
 
 interface ILocalRepository {
-    suspend fun getFavorite(id: String):Flow<Favorite>
+    suspend fun getFavorite():List<Favorite>
+    suspend fun getFavoriteByCode(code: String): Favorite
     suspend fun addFavorite(favorite: Favorite)
-    suspend fun deleteFavorite(favorite: Favorite)
+    suspend fun deleteFavorite(code: String)
+
 }

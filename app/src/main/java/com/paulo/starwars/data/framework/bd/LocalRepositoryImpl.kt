@@ -3,14 +3,14 @@ package com.paulo.starwars.data.framework.bd
 
 import com.paulo.starwars.domain.models.Favorite
 import com.paulo.starwars.domain.repository.ILocalRepository
-import kotlinx.coroutines.flow.Flow
+
 
 
 class LocalRepositoryImpl(
     private val dao: FavoriteDao
 ) : ILocalRepository {
 
-    override suspend fun getFavorite(id: String): Flow<Favorite> {
+    override suspend fun getFavorite(): List<Favorite> {
        return dao.getFavorite()
     }
 
@@ -18,8 +18,12 @@ class LocalRepositoryImpl(
         dao.addFavorite(favorite)
     }
 
-    override suspend fun deleteFavorite(favorite: Favorite) {
-        dao.deleteFavorite(favorite)
+    override suspend fun deleteFavorite(code: String) {
+        dao.deleteFavorite(code)
+    }
+
+    override suspend fun getFavoriteByCode(code: String): Favorite  {
+        return dao.getFavoriteByCode(code)
     }
 
 

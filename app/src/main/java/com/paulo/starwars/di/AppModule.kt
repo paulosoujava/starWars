@@ -11,7 +11,11 @@ import com.paulo.starwars.domain.repository.ILocalRepository
 import com.paulo.starwars.domain.repository.IRemoteRepository
 import com.paulo.starwars.domain.usecases.list.GetHomeUseCase
 import com.paulo.starwars.domain.usecases.listItem.GetListItemDetailUseCase
+import com.paulo.starwars.domain.usecases.common.AddFavoriteUseCase
+import com.paulo.starwars.domain.usecases.common.DeleteFavoriteUseCase
+import com.paulo.starwars.domain.usecases.profile.GetFavoriteByCodeUseCase
 import com.paulo.starwars.domain.usecases.profile.GetProfileUseCase
+import com.paulo.starwars.domain.usecases.favorite.GetFavoriteUseCase
 import com.paulo.starwars.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -26,6 +30,50 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+
+    //********************************************************
+    // USE CASES
+    //********************************************************
+
+
+    @Provides
+    @Singleton
+    fun provideListUseCases() = GetHomeUseCase()
+
+    @Provides
+    @Singleton
+    fun provideFavoriteUseCases(
+        local: ILocalRepository
+    ) = com.paulo.starwars.domain.usecases.favorite.UseCases(
+        getFavoriteUseCase = GetFavoriteUseCase(local),
+        deleteFavoriteUseCase = DeleteFavoriteUseCase(local),
+        addFavoriteUseCase = AddFavoriteUseCase(local)
+    )
+
+    @Provides
+    @Singleton
+    fun provideProfileUseCases(
+        repository: IRemoteRepository,
+        local: ILocalRepository,
+    ) = com.paulo.starwars.domain.usecases.profile.UseCases(
+        addFavoriteUseCase = AddFavoriteUseCase(local),
+        deleteFavoriteUseCase = DeleteFavoriteUseCase(local),
+        getFavoriteByCodeUseCase = GetFavoriteByCodeUseCase(local),
+        getProfileUseCase = GetProfileUseCase(repository),
+    )
+
+
+    @Provides
+    @Singleton
+    fun provideListItemUseCases(
+        repository: IRemoteRepository
+    ) = GetListItemDetailUseCase(repository = repository)
+
+
+    //********************************************************
+    // RETROFIT
+    //********************************************************
+
     @Provides
     @Singleton
     fun provideApi(): Api {
@@ -38,31 +86,19 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideListUseCases() = GetHomeUseCase()
-
-    @Provides
-    @Singleton
-    fun provideProfileUseCases(
-        repository: IRemoteRepository
-    ) = GetProfileUseCase( repository =  repository)
-
-
-    @Provides
-    @Singleton
-    fun provideListItemUseCases(
-        repository: IRemoteRepository
-    ) = GetListItemDetailUseCase(repository = repository)
-
-    @Provides
-    @Singleton
     fun provideRemoteRepository(api: Api): IRemoteRepository {
         return RemoteRepositoryImpl(api)
     }
 
+
+    //********************************************************
+    // ROOM
+    //********************************************************
+
     @Provides
-    fun provideFavoreteDb(
+    fun provideFavoriteDb(
         @ApplicationContext
-        context : Context
+        context: Context
     ) = Room.databaseBuilder(
         context,
         FavoriteDB::class.java,

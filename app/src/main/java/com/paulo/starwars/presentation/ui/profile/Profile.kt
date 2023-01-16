@@ -1,6 +1,5 @@
 package com.paulo.starwars.presentation.ui.profile
 
-import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,7 +26,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +39,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,37 +56,45 @@ import com.paulo.starwars.presentation.ui.commom.Loading
 import com.paulo.starwars.presentation.ui.commom.TopBar
 import com.paulo.starwars.utils.Constants
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun Profile(
     navController: NavHostController,
     urlPhoto: String?,
-    code: String?
+    code: String
 ) {
 
     val viewModel = hiltViewModel<ProfileViewModel>()
     val state = viewModel.uiState.collectAsState()
 
-    if (code == null) {
+    if (code == "invalid") {
         ErrorState(
             navController = navController,
-            "Ops, the code has invaliable!!"
+            "Ops, the code has invalid!!"
         )
         return
     }
 
-        viewModel.fetchData(if(code.toInt()== 0) "1" else code)
+    val newCode = if (code.toInt() == 0) 1 else code.toInt() + 1
+    SideEffect {
+        viewModel.getFavorite(newCode)
+        viewModel.fetchData(newCode)
+    }
+
 
     when (state.value.stateUi) {
         is Events.Error -> ErrorState(navController = navController)
         Events.Loading -> Loading()
         Events.Regular -> {
             val people = state.value.people
+            val photo = urlPhoto ?: Constants.NO_PHOTO
             if (people != null) {
                 RegularContent(
                     people = people,
                     navController = navController,
-                    urlPhoto = urlPhoto ?: Constants.NO_PHOTO
+                    urlPhoto = photo,
+                    code = newCode,
+                    viewModel = viewModel
                 )
             } else {
                 ErrorState(navController = navController)
@@ -101,13 +111,19 @@ fun Profile(
 private fun RegularContent(
     people: People,
     navController: NavHostController,
-    urlPhoto: String
+    urlPhoto: String,
+    code: Int,
+    viewModel: ProfileViewModel
 ) {
     val context = LocalContext.current
 
+    val state = viewModel.uiState.collectAsState()
+
     Scaffold(
         topBar = {
-            TopBar(title = people.name) {
+            TopBar(
+                title = people.name,
+            ) {
                 navController.popBackStack()
             }
         }
@@ -134,7 +150,10 @@ private fun RegularContent(
                 ) {
                     ImageCoil("${Constants.BASE_PATH_CHARACTERES}$urlPhoto")
                 }
-                Column(horizontalAlignment = Alignment.Start) {
+                Column(
+                    modifier = Modifier.padding(top = 10.dp),
+                    horizontalAlignment = Alignment.Start
+                ) {
                     Link(
                         label = stringResource(R.string.birth_year),
                         text = people.birthYear,
@@ -146,7 +165,8 @@ private fun RegularContent(
                             text = "",
                             hasLink = true,
                             action = {
-                                Toast(context)
+                                Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG)
+                                    .show()
                             })
                     Link(
                         label = stringResource(R.string.height),
@@ -179,33 +199,53 @@ private fun RegularContent(
                             text = "",
                             hasLink = true,
                             action = {
-                                Toast(context)
+                                Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG)
+                                    .show()
                             })
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 10.dp, end = 10.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.Bottom
+                    ) {
+                        IconButton(
+                            onClick = {
+                                viewModel.favorite(
+                                    name = people.name,
+                                    urlPhoto = urlPhoto,
+                                    code = code.toString()
+                                )
+                            },
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(50.dp))
+                        ) {
+                            Image(
+                                painter = painterResource(
+                                    id = if (state.value.favorite)
+                                        R.drawable.baseline_favorite_24
+                                    else
+                                        R.drawable.baseline_favorite_border_24
+                                ),
+                                contentDescription = stringResource(R.string.favorite)
+                            )
+                        }
+                    }
 
                 }
 
             }
             Spacer(modifier = Modifier.height(10.dp))
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.End,
-                verticalAlignment = Alignment.Bottom
-            ) {
-                IconButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(50.dp))
-                        .background(Color.Red)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.baseline_favorite_border_24),
-                        contentDescription = stringResource(R.string.favorite)
-                    )
-                }
-            }
-
+            Text(
+                text = people.name,
+                style = TextStyle(
+                    color = Color.Black,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+            )
 
             ListRelated(
                 title = stringResource(R.string.related_films),
@@ -225,12 +265,6 @@ private fun RegularContent(
 
         }
     }
-}
-
-@Composable
-private fun Toast(context: Context) {
-    Toast.makeText(context, "Not implemented", Toast.LENGTH_LONG)
-        .show()
 }
 
 
