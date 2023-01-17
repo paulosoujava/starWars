@@ -52,7 +52,7 @@ externo ou interno, atualizando o state e devolvendo para a tela
     --   Films | Species | Starships | Vehicles | Planets (basicamente um crtl +c  ctrl + v), do que já temos 
   - Implementar o broadcast da conexão com a iternet, para determinar se pega do cache
   -  Usar um Interceptor para fazer cache ou o room
-
+  - implemantar search
 ## Testes
  - ROOM [androidTest]
  <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/testroom.png"  width="300"/>
