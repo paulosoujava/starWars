@@ -54,10 +54,10 @@ externo ou interno, atualizando o state e devolvendo para a tela
   -  Usar um Interceptor para fazer cache ou o room
 
 ## Testes
- - ROOM
+ - ROOM [androidTest]
  <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/testroom.png"  width="300"/>
-
-
+ - UseCase [test]
+   <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/tes2.png"  width="300"/>
 
 ## Screens:
     <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg1.png"  width="300"/>

@@ -1,4 +1,4 @@
-package com.paulo.starwars
+package com.paulo.starwars.data.framework.local
 
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
@@ -12,9 +12,9 @@ import org.junit.Test
 
 class FavoriteDaoTest {
 
-    lateinit var favoriteDatabase : FavoriteDB
-    lateinit var favoriteDao: FavoriteDao
-    val itemFavorite = Favorite(1, "testePhoto", "testName")
+    private lateinit var favoriteDatabase : FavoriteDB
+    private lateinit var favoriteDao: FavoriteDao
+    private val itemFavorite = Favorite(1, "testePhoto", "testName")
 
 
     @Before
