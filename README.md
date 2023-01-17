@@ -60,14 +60,13 @@ externo ou interno, atualizando o state e devolvendo para a tela
    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/test2.png"  width="300"/>
 
 ## Screens:
-
-    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg1.png"  width="300"/>
-    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg2.png"  width="300"/>
-    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg3.png"  width="300"/>
-    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg4.png"  width="300"/>
-    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg5.png"  width="300"/>
-    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg7.png"  width="300"/>
-    <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg8.png"  width="300"/>
+   <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg1.png"  width="300"/>
+   <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg2.png"  width="300"/>
+   <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg3.png"  width="300"/>
+   <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg4.png"  width="300"/>
+   <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg5.png"  width="300"/>
+   <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg7.png"  width="300"/>
+   <img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg8.png"  width="300"/>
                     
 
 ## Documentation:
