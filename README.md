@@ -18,9 +18,6 @@ __________
 
 
 
-## Eis a disposição das pastas:
-<img src="https://raw.githubusercontent.com/paulosoujava/starWars/main/app/src/main/res/drawable/pg6.png"  width="100"/>
-
 Foi usado o retrofit para dados Remotos
 Foi usado o room pada banco de dados
 
